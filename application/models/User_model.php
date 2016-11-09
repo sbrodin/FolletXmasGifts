@@ -5,7 +5,7 @@ class User_model extends MY_Model {
     public function __construct()
     {
         parent::__construct();
-        $this->table = $this->config->item('user', 'table');
+        $this->table = 'user';
     }
 
     public function get_user_by_auth($login, $password)

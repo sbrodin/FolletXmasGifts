@@ -2,11 +2,11 @@
 
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-
         <title><?= $this->lang->line('application_title') . ' - ' . $title ?></title>
+
+        <meta charset="utf-8">
         <meta name="description" content="<?= $title ?>">
-        <meta name="author" content="Stanislas Brodin">
+        <meta name="author" content="sbrodin & heulene">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link href="<?= css_url('bootstrap.4.0.0-alpha.4.min') ?>" media="screen" rel="stylesheet" type="text/css">

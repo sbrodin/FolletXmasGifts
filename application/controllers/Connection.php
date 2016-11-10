@@ -7,6 +7,7 @@ class Connection extends CI_Controller {
 
     // Gestion des acl
     public $admin_acl = array(
+        'admin_all',
         // acl pour wish
         'add_wish',
         'view_wishes',

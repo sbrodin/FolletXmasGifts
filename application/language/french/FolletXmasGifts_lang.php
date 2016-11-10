@@ -25,6 +25,12 @@ $lang['contact'] = 'Contact';
 $lang['filter_verb'] = 'Filtrer';
 $lang['filters'] = 'Filtres';
 $lang['show_hide'] = 'Afficher / Masquer';
+$lang['password'] = 'Mot de passe';
+$lang['password_confirmation'] = 'Confirmation du mot de passe';
+$lang['new_password'] = 'Nouveau mot de passe';
+$lang['new_password_confirmation'] = 'Confirmation du nouveau mot de passe';
+$lang['email'] = 'Email';
+$lang['cancel'] = 'Annuler';
 
 // Champs spécifiques à l'application
 $lang['application_title'] = 'FolletXmasGifts';
@@ -39,10 +45,5 @@ $lang['incorrect_login'] = 'Mauvaise paire email / mot de passe.';
 
 // Messages de contrôle des formulaires
 
-
-$lang['password'] = 'Mot de passe';
-$lang['password_confirmation'] = 'Confirmation du mot de passe';
-$lang['new_password'] = 'Nouveau mot de passe';
-$lang['new_password_confirmation'] = 'Confirmation du nouveau mot de passe';
-$lang['email'] = 'Email';
-$lang['cancel'] = 'Annuler';
+// Admin
+$lang['site_admin'] = 'Gestion du site';

@@ -46,3 +46,19 @@ h6 { font-size: 1em; }
 p {
     margin: 1em 0;
 }
+
+
+
+/** COMMON **/
+.boxed {
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.7);
+    background-color: #FFFFFF;
+}
+.wrapper {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+}
+.main-container {
+    padding: 40px;
+}

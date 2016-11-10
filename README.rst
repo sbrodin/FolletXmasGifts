@@ -22,10 +22,9 @@ PHP version 5.6 ou plus récent est recommandé.
 Installation
 ************
 
-Copiez tous les fichiers. Ensuite copiez les fichiers depuis _application/config
-vers application/config.
-Changez les 2 fichiers de configuration config.php and database.php pour
-correspondre à la configuration de votre serveur et à votre base de données.
+Copiez les fichiers _config/config.php et _config/database.php vers application/config.
+Changez les 2 fichiers de configuration config/config.php et config/database.php pour correspondre à la configuration de votre serveur et à votre base de données.
+Copiez le fichier _config/.htaccess à la racine du projet
 Demandez une structure de base à cette adresse : `stanislas.brodin@gmail.com <mailto:stanislas.brodin@gmail.com>`_.
 
 *******
@@ -46,3 +45,8 @@ TODO
 ****
 
 Liste des éléments restants à faire :
+    - Gestion des utilisateurs en admin
+    - Formulaire pour les souhaits
+    - Home:
+        - message "Vous offrez un cadeau à XXXX"
+        - liste de souhaits de XXXX

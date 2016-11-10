@@ -1,3 +1,4 @@
+<a href="<?= site_url('admin/users/create') ?>" class="btn btn-sm btn-outline-primary m-b-2"><?= $this->lang->line('add_a_user');?></a>
 <table class="table-striped table-bordered table-hover">
     <thead>
         <tr>

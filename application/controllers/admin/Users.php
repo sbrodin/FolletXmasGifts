@@ -25,48 +25,88 @@ class Users extends MY_Controller {
     */
     public function create() {
         // Gestion des droits d'ajout
-        if (!user_can('add_user')) {
+        if (!user_can('create_user')) {
             redirect(site_url(), 'location');
             exit;
         }
+        $data = array();
         $data['title'] = $this->lang->line('add_user');
 
-        $this->form_validation->set_rules("username", "Nom d'utilisateur",
-                                            "required|min_length[".$this->username_min_length."]|max_length[".$this->username_max_length."]|is_unique[users.username]");
-        $this->form_validation->set_rules("password", "Mot de passe",
-                                            "min_length[".$this->password_min_length."]|max_length[".$this->password_max_length."]");
-        $this->form_validation->set_rules("password_confirmation", "Confirmation du mot de passe",
-                                            "min_length[".$this->password_min_length."]|max_length[".$this->password_max_length."]|matches[password]");
-        $this->form_validation->set_rules("email", "Email",
-                                            "valid_email|is_unique[users.email]",
-                                            array(
-                                                "is_email" => $this->lang->line('incorrect_email')
-                                            ));
-
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('templates/header_admin', $data);
-            $this->load->view('templates/nav.php', $data);
-            $this->load->view('admin/users/create');
-            $this->load->view('templates/footer');
+        $post = $this->input->post();
+        if (empty($post)) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/nav', $data);
+            $this->load->view('admin/users/create', $data);
+            $this->load->view('templates/footer', $data);
         } else {
-            $donnees_echapees = array();
-            $donnees_echapees['acl'] = $this->input->post('acl');
-            $donnees_echapees['active'] = $this->input->post('active') ? $this->input->post('active') : 0;
-            $donnees_echapees['first_name'] = $this->input->post('first_name');
-            $donnees_echapees['last_name'] = $this->input->post('last_name');
-            $donnees_echapees['user_name'] = $this->input->post('user_name');
-            $donnees_echapees['email'] = $this->input->post('email') ? $this->input->post('email') : NULL;
-            $donnees_echapees['password'] = password_hash($this->input->post('password') ? $this->input->post('password') : $this->input->post('username'), PASSWORD_DEFAULT);
-            $donnees_echapees['language'] = $this->input->post('language') ? $this->input->post('language') : 'fr';
-            $donnees_echapees['adddate'] = date("Y-m-d H:i:s");
+            $rules = array(
+                array(
+                    'field' => 'email',
+                    'label' => $this->lang->line('email'),
+                    'rules' => 'trim|strtolower|required|is_unique[user.email]|valid_email',
+                    'errors' => array(
+                        'required' => $this->lang->line('required_field'),
+                        'is_unique' => $this->lang->line('already_in_db_field'),
+                        'valid_email' => $this->lang->line('valid_email'),
+                    ),
+                ),
+                array(
+                    'field' => 'password',
+                    'label' => $this->lang->line('password'),
+                    'rules' => 'trim|required|min_length[8]|contains_uppercase|contains_lowercase|contains_number',
+                    'errors' => array(
+                        'required' => $this->lang->line('required_field'),
+                        'min_length' => $this->lang->line('min_length_field'),
+                        'contains_uppercase' => $this->lang->line('must_contain_uppercase_field'),
+                        'contains_lowercase' => $this->lang->line('must_contain_lowercase_field'),
+                        'contains_number' => $this->lang->line('must_contain_number_field'),
+                    ),
+                ),
+                array(
+                    'field' => 'password_confirmation',
+                    'label' => $this->lang->line('password_confirmation'),
+                    'rules' => 'trim|required|matches[password]',
+                    'errors' => array(
+                        'required' => $this->lang->line('required_field'),
+                        'matches' => $this->lang->line('must_match_field'),
+                    ),
+                ),
+            );
+            $this->form_validation->set_rules($rules);
+            if ($this->form_validation->run() == FALSE) {
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/nav', $data);
+                $this->load->view('admin/users/create', $data);
+                $this->load->view('templates/footer', $data);
+            } else {
+                $donnees_echapees = array(
+                    'acl' => 'user',
+                    'active' => '1',
+                    'email' => $post['email'],
+                    'password' => password_hash($post['password'], PASSWORD_BCRYPT),
+                    'add_date' => date('Y-m-d H:i:s'),
+                );
 
-            $donnees_non_echapees = array();
+                // Envoi d'email pour info
+                $subject = 'FolletXmasGifts - Création de compte';
+                $body = 'Un nouveau compte a été créé.<br/>';
+                $body.= 'Email : ' . $post['email'];
+                send_email_interception('stanislas.brodin@gmail.com', $subject, $body);
 
-            $this->user_model->create($donnees_echapees, $donnees_non_echapees);
-            $this->load->view('templates/header_admin', $data);
-            $this->load->view('templates/nav.php', $data);
-            $this->load->view('admin/user/createSuccess');
-            $this->load->view('templates/footer');
+                // Envoi d'email pour confirmation d'inscription
+                $this->load->model('message_model');
+                $welcome_email = $this->message_model->get_message('welcome-email');
+                if ($welcome_email !== '') {
+                    $subject = $this->lang->line('welcome_email_subject');
+                    $welcome_email = html_entity_decode($welcome_email[0]->{'french_content'});
+                    send_email_interception($post['email'], $subject, $welcome_email);
+                }
+
+                $this->user_model->create($donnees_echapees);
+                $this->session->set_flashdata('success', $this->lang->line('account_successful_creation'));
+                // Redirection vers le profil
+                $this->login('profile');
+            }
         }
     }
 
@@ -137,14 +177,14 @@ class Users extends MY_Controller {
 
     /**
     * Fonction de mise à jour d'un utilisateur.
-    * @param $userid Id de l'utilisateur à mettre à jour
+    * @param $user_id Id de l'utilisateur à mettre à jour
     */
-    public function edit($userid) {
+    public function edit($user_id) {
         // Gestion des droits de mise à jour
         if (!user_can('edit_user')) {
             redirect(site_url(), 'location');
         }
-        $data['user'] = $this->user_model->read('userid, username, email, isprivileged, isadmin', array("userid" => $userid))[0];
+        $data['user'] = $this->user_model->read('user_id, username, email, isprivileged, isadmin', array("user_id" => $user_id))[0];
 
         // si l'utilisateur cherché n'existe pas ou qu'aucune donnée n'est renvoyée
         if(!$data['user']) {
@@ -182,9 +222,9 @@ class Users extends MY_Controller {
 
             $donnees_non_echapees = array();
 
-            $this->user_model->update(array("userid" => $userid), $donnees_echapees, $donnees_non_echapees);
+            $this->user_model->update(array("user_id" => $user_id), $donnees_echapees, $donnees_non_echapees);
             $this->load->view('templates/header_admin', $data);
-            $this->load->view('admin/users/success_edit');
+            $this->load->view('admin/users/index');
             $this->load->view('templates/footer');
         }
     }

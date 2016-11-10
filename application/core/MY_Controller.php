@@ -11,10 +11,13 @@ class MY_Controller extends CI_Controller {
     public function __construct() {
         parent::__construct();
 
+        // Chargement du fichier de langue
+        $this->lang->load('FolletXmasGifts', 'french');
+
         // Authentification de l'utilisateur
         if (!is_connected()) {
             // Redirige l'utilisateur vers la page de connexion s'il n'est pas authentifié
-            redirect(site_url(), 'location');
+            redirect(site_url('connection'), 'location');
         }
     }
 }

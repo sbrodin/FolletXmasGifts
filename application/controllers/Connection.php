@@ -6,6 +6,14 @@
 class Connection extends CI_Controller {
 
     // Gestion des acl
+    public $admin_acl = array(
+        // acl pour wish
+        'add_wish',
+        'view_wishes',
+        'view_wish',
+        'edit_wish',
+        'delete_wish',
+    );
     public $user_acl = array(
         // acl pour wish
         'add_wish',
@@ -21,6 +29,8 @@ class Connection extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('user_model');
+        // Chargement du fichier de langue
+        $this->lang->load('FolletXmasGifts', 'french');
     }
 
     /**

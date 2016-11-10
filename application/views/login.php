@@ -17,14 +17,11 @@
                 <?= $this->session->flashdata('info') ?>
             </div>
         <?php endif ?>
-        <a class="btn btn-sm btn-secondary m-b-2" href="<?= site_url()?>"><?= $this->lang->line('back') ?></a>
-
-        <a class="btn btn-outline-primary pull-xs-right" href="<?= site_url('connection/create_account')?>"><?= $this->lang->line('create_account') ?></a>
 
         <?= validation_errors() ?>
 
         <?= form_open('connection/login?url=' . $url) ?>
-            <label for="email"><?= $this->lang->line('email') ?> : </label>
+            <label for="email" class="m-t-2"><?= $this->lang->line('email') ?> : </label>
             <input type="email" id="email" name="email" class="form-control m-b-1" placeholder="<?= $this->lang->line('email') ?>" required="required" autofocus>
             <label for="password"><?= $this->lang->line('password') ?> : </label>
             <input type="password" id="password" name="password" class="form-control" placeholder="<?= $this->lang->line('password') ?>" required="required"><br/>

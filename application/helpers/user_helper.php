@@ -43,12 +43,3 @@ function is_connected() {
 function is_admin() {
     return (get_instance()->session->get_userdata('user')['user']->acl == 'admin');
 }
-
-/**
-  * Cette fonction vérifie si un utilisateur est moderateur
-  *
-  * @return Booléen pour savoir si l'utilisateur est moderateur
-  */
-function is_moderator() {
-    return (get_instance()->session->get_userdata('user')['user']->acl == 'moderator');
-}

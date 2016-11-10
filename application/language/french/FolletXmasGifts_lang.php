@@ -47,3 +47,21 @@ $lang['incorrect_login'] = 'Mauvaise paire email / mot de passe.';
 
 // Admin
 $lang['site_admin'] = 'Gestion du site';
+$lang['users_admin'] = 'Gestion des utilisateurs';
+
+// Gestion des utilisateurs
+$lang['add_a_user'] = 'Ajouter un utilisateur';
+$lang['index_user'] = 'Liste des utilisateurs';
+$lang['first_name'] = 'Prénom';
+$lang['last_name'] = 'Nom';
+$lang['user_name'] = 'Nom d\'utilisateur';
+$lang['acl'] = 'Statut';
+$lang['is_active'] = 'Actif ?';
+$lang['last_connection'] = 'Dernière connexion';
+$lang['isadmin'] = 'Admin ?';
+$lang['add_user'] = 'Ajouter l\'utilisateur';
+$lang['never_connected'] = 'Ne s\'est jamais connecté';
+$lang['incorrect_email'] = "Le champ %s ne correspond pas à une adresse email valide";
+$lang['edit_user'] = 'Mettre à jour';
+$lang['activate_user'] = 'Activer';
+$lang['deactivate_user'] = 'Désactiver';

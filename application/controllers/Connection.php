@@ -7,7 +7,15 @@ class Connection extends CI_Controller {
 
     // Gestion des acl
     public $admin_acl = array(
+        // acl pour admin
         'admin_all',
+        // acl pour admin users
+        'view_users',
+        'create_user',
+        'view_user',
+        'edit_user',
+        'activate_user',
+        'deactivate_user',
         // acl pour wish
         'add_wish',
         'view_wishes',

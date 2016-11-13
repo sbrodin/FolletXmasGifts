@@ -1,4 +1,4 @@
-<a href="<?= site_url('admin/users/create') ?>" class="btn btn-sm btn-outline-primary m-b-2"><?= $this->lang->line('add_a_user');?></a>
+<a class="btn btn-sm btn-outline-primary m-b-2" href="<?= site_url('admin/users/create') ?>"><?= $this->lang->line('add_a_user');?></a>
 <table class="table-striped table-bordered table-hover">
     <thead>
         <tr>
@@ -24,7 +24,7 @@
             <td><?= $user->acl ?></td>
             <td><?= $user->active ?></td>
             <td>
-                <?php if ($user->user_id !== $this->session->userdata['user']->user_id) : ?>
+                <?php if ($user->user_id !== $this->session->userdata['user']->user_id && $user->acl !== 'admin') : ?>
                     <?php if ($user->active === $this->lang->line('yes')) : ?>
                         <a href="<?= site_url('admin/users/deactivate/'.$user->user_id) ?>"><?= $this->lang->line('deactivate_user') ?></a>
                     <?php else : ?>

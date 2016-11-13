@@ -94,6 +94,71 @@ class Connection extends CI_Controller {
     }
 
     /**
+    * Fonction d'affichage de la page de changement de
+    * mot de passe à la première connexion.
+    */
+    public function first_connection() {
+        $data = array();
+        $data['title'] = $this->lang->line('first_connection');
+
+        if (get_cookie('folletxmasgifts_connection_email')) {
+            $data['email'] = get_cookie('folletxmasgifts_connection_email');
+        } else {
+            $this->session->set_flashdata('error', $this->lang->line('deactivated_account'));
+            redirect(site_url(), 'location');
+            exit;
+        }
+
+        $post = $this->input->post();
+        if (empty($post)) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/nav', $data);
+            $this->load->view('first_connection', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+            $rules = array(
+                array(
+                    'field' => 'new_password',
+                    'label' => $this->lang->line('new_password'),
+                    'rules' => 'trim|required',
+                    'errors' => array(
+                        'required' => $this->lang->line('required_field'),
+                    ),
+                ),
+                array(
+                    'field' => 'new_password_confirmation',
+                    'label' => $this->lang->line('new_password_confirmation'),
+                    'rules' => 'trim|required|matches[new_password]',
+                    'errors' => array(
+                        'required' => $this->lang->line('required_field'),
+                        'matches' => $this->lang->line('must_match_field'),
+                    ),
+                ),
+            );
+            $this->form_validation->set_rules($rules);
+            if ($this->form_validation->run() == FALSE) {
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/nav', $data);
+                $this->load->view('first_connection', $data);
+                $this->load->view('templates/footer', $data);
+            } else {
+                $where = array(
+                    'email' => $post['email'],
+                );
+                $donnees_echapees = array(
+                    'password' => password_hash($post['new_password'], PASSWORD_BCRYPT),
+                    'first_connection' => 0,
+                );
+                $this->user_model->update($where, $donnees_echapees);
+                delete_cookie('folletxmasgifts_connection_email');
+                $this->session->set_flashdata('success', $this->lang->line('password_saved'));
+                redirect(site_url('connection'), 'location');
+                exit;
+            }
+        }
+    }
+
+    /**
     * Fonction de connexion.
     * Cette fonction stocke en session les acl en fonction des privilèges récupérés en base de l'utilisateur.
     */
@@ -111,11 +176,19 @@ class Connection extends CI_Controller {
         }
 
         if ($user = $this->user_model->get_user_by_auth($post['email'], $post['password'])) {
+            if ($user->first_connection) {
+                $this->input->set_cookie('folletxmasgifts_connection_email', $post['email'], 3600*24*30, '', '/', '', FALSE, TRUE);
+                $this->session->set_flashdata('info', $this->lang->line('change_password_first_connection'));
+                redirect(site_url('connection/first_connection'), 'location');
+                exit;
+            }
+
             if ($user->active == 0) {
                 $this->session->set_flashdata('error', $this->lang->line('deactivated_account'));
                 redirect(site_url('connection'), 'location');
                 exit;
             }
+
             $donnees_echapees = array(
                 'last_connection' => date("Y-m-d H:i:s"),
                 'hash' => NULL,

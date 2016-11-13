@@ -2,7 +2,7 @@
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
         <?php if ($this->session->flashdata('error')) : ?>
-            <div class="alert alert-alert alert-dismissible fade in" role="alert">
+            <div class="alert alert-danger alert-dismissible fade in" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -17,10 +17,18 @@
                 <?= $this->session->flashdata('info') ?>
             </div>
         <?php endif ?>
+        <?php if ($this->session->flashdata('success')) : ?>
+            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <?= $this->session->flashdata('success') ?>
+            </div>
+        <?php endif ?>
 
         <?= validation_errors() ?>
 
-        <?= form_open('connection/login?url=' . $url) ?>
+        <form action="<?= site_url('connection/login?url=' . $url) ?>" method="post" accept-charset="utf-8">
             <label for="email" class="m-t-2"><?= $this->lang->line('email') ?> : </label>
             <input type="email" id="email" name="email" class="form-control m-b-1" placeholder="<?= $this->lang->line('email') ?>" required="required" autofocus>
             <label for="password"><?= $this->lang->line('password') ?> : </label>

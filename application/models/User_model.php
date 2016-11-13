@@ -14,6 +14,14 @@ class User_model extends MY_Model {
         $where = array('email' => $login);
         $user = $this->read($select, $where)[0];
 
+        if ($user->first_connection === '1') {
+            if ($password === $user->password) {
+                return $user;
+            } else {
+                return FALSE;
+            }
+        }
+
         if (password_verify($password, $user->password)) {
             return $user;
         } else {

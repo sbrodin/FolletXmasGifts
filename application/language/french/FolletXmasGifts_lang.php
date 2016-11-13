@@ -36,6 +36,7 @@ $lang['cancel'] = 'Annuler';
 $lang['application_title'] = 'FolletXmasGifts';
 
 // Messages de succès
+$lang['password_saved'] = 'Mot de passe enregistré, vous pouvez maintenant vous connecter.';
 
 // Messages d'information
 $lang['reset_password_email_sent'] = 'Email pour la réinitialisation du mot de passe envoyé, veuillez vérifier votre boîte mail.';
@@ -50,6 +51,7 @@ $lang['site_admin'] = 'Gestion du site';
 $lang['users_admin'] = 'Gestion des utilisateurs';
 
 // Gestion des utilisateurs
+$lang['back_to_users_admin'] = 'Retour à la gestion des utilisateurs';
 $lang['add_a_user'] = 'Ajouter un utilisateur';
 $lang['index_user'] = 'Liste des utilisateurs';
 $lang['first_name'] = 'Prénom';
@@ -60,8 +62,12 @@ $lang['is_active'] = 'Actif ?';
 $lang['last_connection'] = 'Dernière connexion';
 $lang['isadmin'] = 'Admin ?';
 $lang['add_user'] = 'Ajouter l\'utilisateur';
-$lang['never_connected'] = 'Ne s\'est jamais connecté';
+$lang['never_connected'] = 'Jamais connecté';
 $lang['incorrect_email'] = "Le champ %s ne correspond pas à une adresse email valide";
 $lang['edit_user'] = 'Mettre à jour';
 $lang['activate_user'] = 'Activer';
 $lang['deactivate_user'] = 'Désactiver';
+
+// Connexion
+$lang['first_connection'] = 'Première connexion';
+$lang['change_password_first_connection'] = 'Pour votre première connexion, veuillez définir un mot de passe';

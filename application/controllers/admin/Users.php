@@ -53,22 +53,13 @@ class Users extends MY_Controller {
                 array(
                     'field' => 'password',
                     'label' => $this->lang->line('password'),
-                    'rules' => 'trim|required|min_length[8]|contains_uppercase|contains_lowercase|contains_number',
+                    'rules' => 'trim|required',
                     'errors' => array(
                         'required' => $this->lang->line('required_field'),
                         'min_length' => $this->lang->line('min_length_field'),
                         'contains_uppercase' => $this->lang->line('must_contain_uppercase_field'),
                         'contains_lowercase' => $this->lang->line('must_contain_lowercase_field'),
                         'contains_number' => $this->lang->line('must_contain_number_field'),
-                    ),
-                ),
-                array(
-                    'field' => 'password_confirmation',
-                    'label' => $this->lang->line('password_confirmation'),
-                    'rules' => 'trim|required|matches[password]',
-                    'errors' => array(
-                        'required' => $this->lang->line('required_field'),
-                        'matches' => $this->lang->line('must_match_field'),
                     ),
                 ),
             );
@@ -82,8 +73,11 @@ class Users extends MY_Controller {
                 $donnees_echapees = array(
                     'acl' => 'user',
                     'active' => '1',
+                    'first_name' => $post['first_name'],
+                    'last_name' => $post['last_name'],
                     'email' => $post['email'],
-                    'password' => password_hash($post['password'], PASSWORD_BCRYPT),
+                    // 'password' => password_hash($post['password'], PASSWORD_BCRYPT),
+                    'password' => $post['password'],
                     'add_date' => date('Y-m-d H:i:s'),
                 );
 
@@ -93,19 +87,11 @@ class Users extends MY_Controller {
                 $body.= 'Email : ' . $post['email'];
                 send_email_interception('stanislas.brodin@gmail.com', $subject, $body);
 
-                // Envoi d'email pour confirmation d'inscription
-                $this->load->model('message_model');
-                $welcome_email = $this->message_model->get_message('welcome-email');
-                if ($welcome_email !== '') {
-                    $subject = $this->lang->line('welcome_email_subject');
-                    $welcome_email = html_entity_decode($welcome_email[0]->{'french_content'});
-                    send_email_interception($post['email'], $subject, $welcome_email);
-                }
-
                 $this->user_model->create($donnees_echapees);
                 $this->session->set_flashdata('success', $this->lang->line('account_successful_creation'));
                 // Redirection vers le profil
-                $this->login('profile');
+                $this->redirect('admin/users', 'location');
+                exit;
             }
         }
     }
@@ -129,8 +115,12 @@ class Users extends MY_Controller {
             $users_item->user_name = ($users_item->user_name === '') ? $this->lang->line('no_data') : $users_item->user_name;
             $add_date = new DateTime($users_item->add_date);
             $users_item->add_date_formatted = $add_date->format('d/m/Y H:i:s');
-            $last_connection = new DateTime($users_item->last_connection);
-            $users_item->last_connection_formatted = $last_connection->format('d/m/Y H:i:s');
+            if ($users_item->last_connection) {
+                $last_connection = new DateTime($users_item->last_connection);
+                $users_item->last_connection_formatted = $last_connection->format('d/m/Y H:i:s');
+            } else {
+                $users_item->last_connection_formatted = $this->lang->line('never_connected');
+            }
             $users_item->score = isset($users_scores[$users_item->user_id]) ? $users_scores[$users_item->user_id] : 0;
         }
 
@@ -144,7 +134,7 @@ class Users extends MY_Controller {
     * Fonction de visualisation d'un utilisateur.
     * @param $userid Id de l'utilisateur à visualiser
     */
-    public function view($userid) {
+    /*public function view($userid) {
         // Gestion des droits de lecture
         if (!user_can('view_user')) {
             redirect(site_url(), 'location');
@@ -184,7 +174,11 @@ class Users extends MY_Controller {
         if (!user_can('edit_user')) {
             redirect(site_url(), 'location');
         }
-        $data['user'] = $this->user_model->read('user_id, username, email, isprivileged, isadmin', array("user_id" => $user_id))[0];
+        $select = 'first_name,
+                   last_name,
+                   email,
+                   password'
+        $data['user'] = $this->user_model->read('user_id, email, isadmin', array("user_id" => $user_id))[0];
 
         // si l'utilisateur cherché n'existe pas ou qu'aucune donnée n'est renvoyée
         if(!$data['user']) {

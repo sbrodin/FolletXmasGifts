@@ -105,6 +105,7 @@ class Users extends MY_Controller {
             redirect(site_url(), 'location');
             exit;
         }
+        $data = array();
         $data['title'] = $this->lang->line('admin') . ' - ' . $this->lang->line('users_admin');
         $data['users'] = $this->user_model->read('*');
 
@@ -174,10 +175,11 @@ class Users extends MY_Controller {
         if (!user_can('edit_user')) {
             redirect(site_url(), 'location');
         }
+        $data = array();
         $select = 'first_name,
                    last_name,
                    email,
-                   password'
+                   password';
         $data['user'] = $this->user_model->read('user_id, email, isadmin', array("user_id" => $user_id))[0];
 
         // si l'utilisateur cherché n'existe pas ou qu'aucune donnée n'est renvoyée

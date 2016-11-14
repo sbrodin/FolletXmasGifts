@@ -56,10 +56,6 @@ class Users extends MY_Controller {
                     'rules' => 'trim|required',
                     'errors' => array(
                         'required' => $this->lang->line('required_field'),
-                        'min_length' => $this->lang->line('min_length_field'),
-                        'contains_uppercase' => $this->lang->line('must_contain_uppercase_field'),
-                        'contains_lowercase' => $this->lang->line('must_contain_lowercase_field'),
-                        'contains_number' => $this->lang->line('must_contain_number_field'),
                     ),
                 ),
             );
@@ -89,7 +85,6 @@ class Users extends MY_Controller {
 
                 $this->user_model->create($donnees_echapees);
                 $this->session->set_flashdata('success', $this->lang->line('account_successful_creation'));
-                // Redirection vers le profil
                 $this->redirect('admin/users', 'location');
                 exit;
             }

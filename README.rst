@@ -45,8 +45,11 @@ TODO
 ****
 
 Liste des éléments restants à faire :
-    - Gestion des utilisateurs en admin
+    - Ajout des "familles"
+    - Ajout table "offers_to" pour gestion des différentes années
+    - Edition des utilisateurs en admin
     - Formulaire pour les souhaits
     - Home:
         - message "Vous offrez un cadeau à XXXX"
         - liste de souhaits de XXXX
+    - Envoi des emails à chaque utilisateur avec mots de passe

@@ -45,7 +45,6 @@ TODO
 ****
 
 Liste des éléments restants à faire :
-    - Ajout table "offers_to" pour gestion des différentes années
     - Gestion des "offers_to" par année
     - Définition de l'année en cours
     - Formulaire pour les souhaits

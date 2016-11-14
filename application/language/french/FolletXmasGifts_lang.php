@@ -85,3 +85,6 @@ $lang['back_to_families_admin'] = 'Retour à la gestion des "familles"';
 $lang['add_a_family'] = 'Ajouter une "famille"';
 $lang['add_family'] = 'Ajouter la "famille"';
 $lang['family_name'] = 'Nom de la "famille"';
+
+// Gestion des offreurs
+$lang['who_offers_to_who'] = 'Qui offre à qui ?';

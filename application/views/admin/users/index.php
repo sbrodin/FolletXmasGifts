@@ -1,10 +1,21 @@
 <a class="btn btn-sm btn-outline-primary m-b-2" href="<?= site_url('admin/users/create') ?>"><?= $this->lang->line('add_a_user');?></a>
+
+<?php if ($this->session->flashdata('success')) : ?>
+    <div class="alert alert-success alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <?= $this->session->flashdata('success') ?>
+    </div>
+<?php endif ?>
+
 <table class="table-striped table-bordered table-hover">
     <thead>
         <tr>
             <th></th>
             <th><?= $this->lang->line('first_name') ?></th>
             <th><?= $this->lang->line('last_name') ?></th>
+            <th><?= $this->lang->line('family') ?></th>
             <th><?= $this->lang->line('email') ?></th>
             <th><?= $this->lang->line('last_connection') ?></th>
             <th><?= $this->lang->line('acl') ?></th>
@@ -19,6 +30,7 @@
             <td><?= $user->user_id ?></td>
             <td><?= $user->first_name ?></td>
             <td><?= $user->last_name ?></td>
+            <td><?= $families[$user->family_id] ?></td>
             <td><?= $user->email ?></td>
             <td><?= $user->last_connection_formatted ?></td>
             <td><?= $user->acl ?></td>

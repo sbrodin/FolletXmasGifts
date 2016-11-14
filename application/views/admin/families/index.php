@@ -1,4 +1,5 @@
 <a class="btn btn-sm btn-outline-primary m-b-2" href="<?= site_url('admin/families/add') ?>"><?= $this->lang->line('add_a_family');?></a>
+
 <?php if ($this->session->flashdata('success')) : ?>
     <div class="alert alert-success alert-dismissible fade in" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -7,6 +8,7 @@
         <?= $this->session->flashdata('success') ?>
     </div>
 <?php endif ?>
+
 <table>
     <thead>
         <tr>

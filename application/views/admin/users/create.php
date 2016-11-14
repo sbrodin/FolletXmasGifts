@@ -1,4 +1,5 @@
 <a class="btn btn-sm btn-outline-primary m-b-2" href="<?= site_url('admin/users') ?>"><?= $this->lang->line('back_to_users_admin') ?></a><br/>
+
 <?= validation_errors() ?>
 
 <?php if (!empty($info)) : ?>

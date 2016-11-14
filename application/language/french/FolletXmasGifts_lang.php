@@ -37,8 +37,10 @@ $lang['application_title'] = 'FolletXmasGifts';
 
 // Messages de succès
 $lang['password_saved'] = 'Mot de passe enregistré, vous pouvez maintenant vous connecter.';
-$lang['family_successful_creation'] = 'Famille créée avec succès';
-$lang['family_successful_edition'] = 'Famille éditée avec succès';
+$lang['family_successful_creation'] = 'Famille créée avec succès !';
+$lang['family_successful_edition'] = 'Famille éditée avec succès !';
+$lang['user_successful_creation'] = 'Utilisateur créé avec succès !';
+$lang['user_successful_edition'] = 'Utilisateur édité avec succès !';
 
 // Messages d'information
 $lang['reset_password_email_sent'] = 'Email pour la réinitialisation du mot de passe envoyé, veuillez vérifier votre boîte mail.';
@@ -66,7 +68,7 @@ $lang['add_a_user'] = 'Ajouter un utilisateur';
 $lang['index_user'] = 'Liste des utilisateurs';
 $lang['first_name'] = 'Prénom';
 $lang['last_name'] = 'Nom';
-$lang['user_name'] = 'Nom d\'utilisateur';
+$lang['family'] = '"Famille"';
 $lang['acl'] = 'Statut';
 $lang['is_active'] = 'Actif ?';
 $lang['last_connection'] = 'Dernière connexion';

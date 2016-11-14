@@ -16,6 +16,10 @@ class Connection extends CI_Controller {
         'edit_user',
         'activate_user',
         'deactivate_user',
+        // acl pour family
+        'view_families',
+        'add_family',
+        'edit_family',
         // acl pour wish
         'add_wish',
         'view_wishes',

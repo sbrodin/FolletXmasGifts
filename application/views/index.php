@@ -1,1 +1,1 @@
-It works !
+<?= $this->lang->line('no_draw_yet') ?>

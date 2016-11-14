@@ -1,1 +1,2 @@
 <a href="<?= site_url('admin/users') ?>" class="btn btn-sm btn-outline-primary"><?= $this->lang->line('users_admin');?></a>
+<a href="<?= site_url('admin/families') ?>" class="btn btn-sm btn-outline-primary"><?= $this->lang->line('families_admin');?></a>

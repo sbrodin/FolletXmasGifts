@@ -37,6 +37,8 @@ $lang['application_title'] = 'FolletXmasGifts';
 
 // Messages de succès
 $lang['password_saved'] = 'Mot de passe enregistré, vous pouvez maintenant vous connecter.';
+$lang['family_successful_creation'] = 'Famille créée avec succès';
+$lang['family_successful_edition'] = 'Famille éditée avec succès';
 
 // Messages d'information
 $lang['reset_password_email_sent'] = 'Email pour la réinitialisation du mot de passe envoyé, veuillez vérifier votre boîte mail.';
@@ -46,9 +48,17 @@ $lang['incorrect_login'] = 'Mauvaise paire email / mot de passe.';
 
 // Messages de contrôle des formulaires
 
+// Autres messages
+$lang['no_draw_yet'] = 'Le tirage n\'a pas encore eu lieu';
+
+// Connexion
+$lang['first_connection'] = 'Première connexion';
+$lang['change_password_first_connection'] = 'Pour votre première connexion, veuillez définir un mot de passe';
+
 // Admin
 $lang['site_admin'] = 'Gestion du site';
 $lang['users_admin'] = 'Gestion des utilisateurs';
+$lang['families_admin'] = 'Gestion des "familles"';
 
 // Gestion des utilisateurs
 $lang['back_to_users_admin'] = 'Retour à la gestion des utilisateurs';
@@ -68,6 +78,8 @@ $lang['edit_user'] = 'Mettre à jour';
 $lang['activate_user'] = 'Activer';
 $lang['deactivate_user'] = 'Désactiver';
 
-// Connexion
-$lang['first_connection'] = 'Première connexion';
-$lang['change_password_first_connection'] = 'Pour votre première connexion, veuillez définir un mot de passe';
+// Gestion des familles
+$lang['back_to_families_admin'] = 'Retour à la gestion des "familles"';
+$lang['add_a_family'] = 'Ajouter une "famille"';
+$lang['add_family'] = 'Ajouter la "famille"';
+$lang['family_name'] = 'Nom de la "famille"';

@@ -175,7 +175,9 @@ class Users extends MY_Controller {
                    last_name,
                    email,
                    password';
-        $data['user'] = $this->user_model->read('user_id, email, isadmin', array("user_id" => $user_id))[0];
+        $data['user'] = $this->user_model->read($select, array("user_id" => $user_id))[0];
+        var_dump($data['user']);
+        exit;
 
         // si l'utilisateur cherché n'existe pas ou qu'aucune donnée n'est renvoyée
         if(!$data['user']) {

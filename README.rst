@@ -45,9 +45,9 @@ TODO
 ****
 
 Liste des éléments restants à faire :
-    - Ajout des "familles"
     - Ajout table "offers_to" pour gestion des différentes années
-    - Edition des utilisateurs en admin
+    - Gestion des "offers_to" par année
+    - Définition de l'année en cours
     - Formulaire pour les souhaits
     - Home:
         - message "Vous offrez un cadeau à XXXX"

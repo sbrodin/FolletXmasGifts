@@ -74,13 +74,15 @@ class Users extends MY_Controller {
         $data = array();
         $data['title'] = $this->lang->line('add_user');
 
+        $data['families'] = $this->family_model->read('*');
+        $families = array();
+        foreach ($data['families'] as $key => $family) {
+            $families[$family->family_id] = $family->name;
+        }
+        $data['families'] = $families;
+
         $post = $this->input->post();
-        if (empty($post)) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/nav', $data);
-            $this->load->view('admin/users/create', $data);
-            $this->load->view('templates/footer', $data);
-        } else {
+        if (!empty($post)) {
             $rules = array(
                 array(
                     'field' => 'email',
@@ -102,17 +104,13 @@ class Users extends MY_Controller {
                 ),
             );
             $this->form_validation->set_rules($rules);
-            if ($this->form_validation->run() == FALSE) {
-                $this->load->view('templates/header', $data);
-                $this->load->view('templates/nav', $data);
-                $this->load->view('admin/users/create', $data);
-                $this->load->view('templates/footer', $data);
-            } else {
+            if ($this->form_validation->run() !== FALSE) {
                 $donnees_echapees = array(
                     'acl' => 'user',
                     'active' => '1',
                     'first_name' => $post['first_name'],
                     'last_name' => $post['last_name'],
+                    'family_id' => $post['family_id'],
                     'email' => $post['email'],
                     // 'password' => password_hash($post['password'], PASSWORD_BCRYPT),
                     'password' => $post['password'],
@@ -131,6 +129,10 @@ class Users extends MY_Controller {
                 exit;
             }
         }
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/nav', $data);
+        $this->load->view('admin/users/create', $data);
+        $this->load->view('templates/footer', $data);
     }
 
     /**
@@ -233,6 +235,7 @@ class Users extends MY_Controller {
             $donnees_echapees = array();
             if ($this->input->post('password')) {
                 $donnees_echapees['password'] = $this->input->post('password');
+                $donnees_echapees['first_connection'] = 1;
             }
             $donnees_echapees['first_name'] = $this->input->post('first_name') ? $this->input->post('first_name') : '';
             $donnees_echapees['last_name'] = $this->input->post('last_name') ? $this->input->post('last_name') : '';

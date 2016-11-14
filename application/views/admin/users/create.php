@@ -10,6 +10,12 @@
         <input type="text" name="first_name" id="first_name" required="required" value="<?= set_value('first_name') ?>" ><br/>
         <label for="last_name"><?= $this->lang->line('last_name') ?> : </label>
         <input type="text" name="last_name" id="last_name" required="required" value="<?= set_value('last_name') ?>" ><br/>
+        <label for="family_id"><?= $this->lang->line('family') ?> : </label>
+        <select name="family_id" id="family_id">
+            <?php foreach ($families as $family_id => $name) : ?>
+                <option value="<?= $family_id ?>" ><?= $name ?></option>
+            <?php endforeach; ?>
+        </select><br/>
         <label for="email"><?= $this->lang->line('email') ?> : </label>
         <input type="email" name="email" id="email" required="required" value="<?= set_value('email') ?>" ><br/>
         <label for="password"><?= $this->lang->line('password') ?> : </label>

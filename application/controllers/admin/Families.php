@@ -11,6 +11,7 @@ class Families extends MY_Controller {
     public function index()
     {
         if (!user_can('view_families')) {
+            $this->session->set_flashdata('warning', sprintf($this->lang->line('no_correct_rights_log_again'), site_url('logout')));
             redirect(site_url(), 'location');
             exit;
         }
@@ -34,6 +35,7 @@ class Families extends MY_Controller {
     public function add()
     {
         if (!user_can('add_family')) {
+            $this->session->set_flashdata('warning', sprintf($this->lang->line('no_correct_rights_log_again'), site_url('logout')));
             redirect(site_url(), 'location');
             exit;
         }
@@ -74,6 +76,7 @@ class Families extends MY_Controller {
     public function edit($family_id = 0)
     {
         if (!user_can('edit_family')) {
+            $this->session->set_flashdata('warning', sprintf($this->lang->line('no_correct_rights_log_again'), site_url('logout')));
             redirect(site_url(), 'location');
             exit;
         }

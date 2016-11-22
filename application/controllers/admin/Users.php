@@ -27,6 +27,7 @@ class Users extends MY_Controller {
     public function index() {
         // Gestion des droits de lecture
         if (!user_can('view_users')) {
+            $this->session->set_flashdata('warning', sprintf($this->lang->line('no_correct_rights_log_again'), site_url('logout')));
             redirect(site_url(), 'location');
             exit;
         }
@@ -68,6 +69,7 @@ class Users extends MY_Controller {
     public function create() {
         // Gestion des droits d'ajout
         if (!user_can('create_user')) {
+            $this->session->set_flashdata('warning', sprintf($this->lang->line('no_correct_rights_log_again'), site_url('logout')));
             redirect(site_url(), 'location');
             exit;
         }
@@ -177,6 +179,7 @@ class Users extends MY_Controller {
     public function edit($user_id) {
         // Gestion des droits de mise à jour
         if (!user_can('edit_user')) {
+            $this->session->set_flashdata('warning', sprintf($this->lang->line('no_correct_rights_log_again'), site_url('logout')));
             redirect(site_url(), 'location');
         }
         $data = array();
@@ -263,6 +266,7 @@ class Users extends MY_Controller {
     public function activate($user_id) {
         // Gestion des droits d'activation
         if (!user_can('activate_user')) {
+            $this->session->set_flashdata('warning', sprintf($this->lang->line('no_correct_rights_log_again'), site_url('logout')));
             redirect(site_url(), 'location');
             exit;
         }
@@ -282,6 +286,7 @@ class Users extends MY_Controller {
     public function deactivate($user_id) {
         // Gestion des droits de désactivation
         if (!user_can('deactivate_user')) {
+            $this->session->set_flashdata('warning', sprintf($this->lang->line('no_correct_rights_log_again'), site_url('logout')));
             redirect(site_url(), 'location');
             exit;
         }

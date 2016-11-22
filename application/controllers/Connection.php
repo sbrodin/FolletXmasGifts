@@ -16,10 +16,14 @@ class Connection extends CI_Controller {
         'edit_user',
         'activate_user',
         'deactivate_user',
-        // acl pour family
+        // acl pour admin family
         'view_families',
         'add_family',
         'edit_family',
+        // acl pour admin offersto
+        'view_offersto',
+        'add_offersto',
+        'edit_offersto',
         // acl pour wish
         'add_wish',
         'view_wishes',
@@ -60,12 +64,7 @@ class Connection extends CI_Controller {
         $data['url'] = $url;
 
         $post = $this->input->post();
-        if (empty($post)) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/nav', $data);
-            $this->load->view('login', $data);
-            $this->load->view('templates/footer', $data);
-        } else {
+        if (!empty($post)) {
             $rules = array(
                 array(
                     'field' => 'email',
@@ -86,15 +85,15 @@ class Connection extends CI_Controller {
                 ),
             );
             $this->form_validation->set_rules($rules);
-            if ($this->form_validation->run() == FALSE) {
-                $this->load->view('templates/header', $data);
-                $this->load->view('templates/nav', $data);
-                $this->load->view('login', $data);
-                $this->load->view('templates/footer', $data);
-            } else {
+            if ($this->form_validation->run() !== FALSE) {
                 $this->login($url);
+                exit;
             }
         }
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/nav', $data);
+        $this->load->view('login', $data);
+        $this->load->view('templates/footer', $data);
     }
 
     /**
@@ -114,12 +113,7 @@ class Connection extends CI_Controller {
         }
 
         $post = $this->input->post();
-        if (empty($post)) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/nav', $data);
-            $this->load->view('first_connection', $data);
-            $this->load->view('templates/footer', $data);
-        } else {
+        if (!empty($post)) {
             $rules = array(
                 array(
                     'field' => 'new_password',
@@ -140,12 +134,7 @@ class Connection extends CI_Controller {
                 ),
             );
             $this->form_validation->set_rules($rules);
-            if ($this->form_validation->run() == FALSE) {
-                $this->load->view('templates/header', $data);
-                $this->load->view('templates/nav', $data);
-                $this->load->view('first_connection', $data);
-                $this->load->view('templates/footer', $data);
-            } else {
+            if ($this->form_validation->run() !== FALSE) {
                 $where = array(
                     'email' => $post['email'],
                 );
@@ -160,6 +149,10 @@ class Connection extends CI_Controller {
                 exit;
             }
         }
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/nav', $data);
+        $this->load->view('first_connection', $data);
+        $this->load->view('templates/footer', $data);
     }
 
     /**
@@ -233,12 +226,7 @@ class Connection extends CI_Controller {
         $data['title'] = $this->lang->line('forgotten_password');
 
         $post = $this->input->post();
-        if (empty($post)) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/nav', $data);
-            $this->load->view('forgotten_password', $data);
-            $this->load->view('templates/footer', $data);
-        } else {
+        if (!empty($post)) {
             $rules = array(
                 array(
                     'field' => 'email',
@@ -252,12 +240,7 @@ class Connection extends CI_Controller {
                 ),
             );
             $this->form_validation->set_rules($rules);
-            if ($this->form_validation->run() == FALSE) {
-                $this->load->view('templates/header', $data);
-                $this->load->view('templates/nav', $data);
-                $this->load->view('forgotten_password', $data);
-                $this->load->view('templates/footer', $data);
-            } else {
+            if ($this->form_validation->run() !== FALSE) {
                 $where = array('email' => $post['email']);
                 $hash = random_string('alnum', 255);
                 $donnees_echapees = array(
@@ -275,6 +258,10 @@ class Connection extends CI_Controller {
                 exit;
             }
         }
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/nav', $data);
+        $this->load->view('forgotten_password', $data);
+        $this->load->view('templates/footer', $data);
     }
 
     /**
@@ -297,12 +284,7 @@ class Connection extends CI_Controller {
         }
 
         $post = $this->input->post();
-        if (empty($post)) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/nav', $data);
-            $this->load->view('reset_password', $data);
-            $this->load->view('templates/footer', $data);
-        } else {
+        if (!empty($post)) {
             $rules = array(
                 array(
                     'field' => 'new_password',
@@ -327,12 +309,7 @@ class Connection extends CI_Controller {
                 ),
             );
             $this->form_validation->set_rules($rules);
-            if ($this->form_validation->run() == FALSE) {
-                $this->load->view('templates/header', $data);
-                $this->load->view('templates/nav', $data);
-                $this->load->view('reset_password', $data);
-                $this->load->view('templates/footer', $data);
-            } else {
+            if ($this->form_validation->run() !== FALSE) {
                 $where = array(
                     'hash' => $hash,
                 );
@@ -346,6 +323,10 @@ class Connection extends CI_Controller {
                 exit;
             }
         }
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/nav', $data);
+        $this->load->view('reset_password', $data);
+        $this->load->view('templates/footer', $data);
     }
 
     /**

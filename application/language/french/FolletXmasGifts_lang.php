@@ -31,6 +31,7 @@ $lang['new_password'] = 'Nouveau mot de passe';
 $lang['new_password_confirmation'] = 'Confirmation du nouveau mot de passe';
 $lang['email'] = 'Email';
 $lang['cancel'] = 'Annuler';
+$lang['year'] = 'Année';
 
 // Champs spécifiques à l'application
 $lang['application_title'] = 'FolletXmasGifts';
@@ -41,14 +42,22 @@ $lang['family_successful_creation'] = 'Famille créée avec succès !';
 $lang['family_successful_edition'] = 'Famille éditée avec succès !';
 $lang['user_successful_creation'] = 'Utilisateur créé avec succès !';
 $lang['user_successful_edition'] = 'Utilisateur édité avec succès !';
+$lang['link_successful_creation'] = '"Lien" créé avec succès !';
+$lang['current_year_successful_edition'] = 'Année courante éditéé avec succès !';
 
 // Messages d'information
-$lang['reset_password_email_sent'] = 'Email pour la réinitialisation du mot de passe envoyé, veuillez vérifier votre boîte mail.';
+$lang['no_correct_rights_log_again'] = 'Vous ne disposez pas des droits nécessaires pour accéder à cette partie du site.<br/><a href="%s" class="alert-link">Connectez-vous</a> à nouveau et réessayez.';
 
 // Messages d'erreur
 $lang['incorrect_login'] = 'Mauvaise paire email / mot de passe.';
+$lang['error_same_user'] = 'Vous avez sélectionné 2 fois la même personne.';
+$lang['duplicate_links'] = 'Le lien existe déjà en base.';
 
 // Messages de contrôle des formulaires
+$lang['required_field'] = 'Le champ "%s" est requis.';
+$lang['must_match_field'] = 'Le champ "%s" doit correspondre au champ "%s".';
+$lang['valid_email'] = 'Le champ "%s" n\'est pas un email valide.';
+$lang['must_be_year_field'] = 'Le champ "%s" doit être une année supérieure ou égale à 2016.';
 
 // Autres messages
 $lang['no_draw_yet'] = 'Le tirage n\'a pas encore eu lieu';
@@ -87,4 +96,9 @@ $lang['add_family'] = 'Ajouter la "famille"';
 $lang['family_name'] = 'Nom de la "famille"';
 
 // Gestion des offreurs
+$lang['back_to_offersto_admin'] = 'Retour à la gestion des "liens"';
 $lang['who_offers_to_who'] = 'Qui offre à qui ?';
+$lang['change_current_year'] = 'Changer l\'année courante';
+$lang['add_a_link'] = 'Ajouter un "lien"';
+$lang['sender'] = 'Expéditeur';
+$lang['receiver'] = 'Destinataire';

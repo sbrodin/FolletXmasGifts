@@ -47,6 +47,7 @@ $lang['current_year_successful_edition'] = 'Année courante éditéé avec succ�
 
 // Messages d'information
 $lang['no_correct_rights_log_again'] = 'Vous ne disposez pas des droits nécessaires pour accéder à cette partie du site.<br/><a href="%s" class="alert-link">Connectez-vous</a> à nouveau et réessayez.';
+$lang['define_links_to_choose_year'] = 'Ajoutez des \'liens\' pour les visualiser et définir l\'année courante';
 
 // Messages d'erreur
 $lang['incorrect_login'] = 'Mauvaise paire email / mot de passe.';

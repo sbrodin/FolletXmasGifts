@@ -36,7 +36,12 @@ class Offersto extends MY_Controller {
         foreach ($data['years'] as $key => $year) {
             $years[$year->year] = $year->year;
         }
-        $data['years'] = $years;
+        if (!empty($years)) {
+            $data['years'] = $years;
+            $data['info'] = '';
+        } else {
+            $data['info'] = $this->lang->line('define_links_to_choose_year');
+        }
 
         $select = 'sender,
                    receiver,

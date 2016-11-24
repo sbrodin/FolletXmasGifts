@@ -26,8 +26,17 @@ class Config_model extends MY_Model {
         if ($name == '' || $value == '') {
             return FALSE;
         }
-        $where = array('name' => $name);
-        $donnees_echappees = array('value' => $value);
-        $this->update($where, $donnees_echappees);
+        // Si la config existe déjà en base, on la met à jour, sinon on l'ajoute
+        if ($this->get_config_db($name)) {
+            $donnees_echappees = array('value' => $value);
+            $where = array('name' => $name);
+            $this->update($where, $donnees_echappees);
+        } else {
+            $donnees_echappees = array(
+                'name' => $name,
+                'value' => $value
+            );
+            $this->create($donnees_echappees);
+        }
     }
 }

@@ -44,6 +44,8 @@ $lang['user_successful_creation'] = 'Utilisateur créé avec succès !';
 $lang['user_successful_edition'] = 'Utilisateur édité avec succès !';
 $lang['link_successful_creation'] = '"Lien" créé avec succès !';
 $lang['current_year_successful_edition'] = 'Année courante éditéé avec succès !';
+$lang['draw_complete_successful'] = 'Année validée !';
+$lang['draw_incomplete_successful'] = 'Année invalidée, tirage à revoir ou à revalider !';
 
 // Messages d'information
 $lang['no_correct_rights_log_again'] = 'Vous ne disposez pas des droits nécessaires pour accéder à cette partie du site.<br/><a href="%s" class="alert-link">Connectez-vous</a> à nouveau et réessayez.';
@@ -62,6 +64,7 @@ $lang['must_be_year_field'] = 'Le champ "%s" doit être une année supérieure o
 
 // Autres messages
 $lang['no_draw_yet'] = 'Le tirage n\'a pas encore eu lieu';
+$lang['you_offer_to'] = 'Cette année, vous offrez à %s !';
 
 // Connexion
 $lang['first_connection'] = 'Première connexion';
@@ -103,3 +106,5 @@ $lang['change_current_year'] = 'Changer l\'année courante';
 $lang['add_a_link'] = 'Ajouter un "lien"';
 $lang['sender'] = 'Expéditeur';
 $lang['receiver'] = 'Destinataire';
+$lang['draw_complete'] = 'Tirage complet pour l\'année %d';
+$lang['draw_incomplete'] = 'Tirage annulé pour l\'année %d';

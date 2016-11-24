@@ -23,6 +23,7 @@ class Offersto extends MY_Controller {
         $data['title'] = $this->lang->line('admin') . ' - ' . $this->lang->line('offersto_admin');
 
         $data['current_year'] = $this->config_model->get_config_db('current_year');
+        $data['current_year_complete'] = $this->config_model->get_config_db('year_' . $data['current_year'] . '_complete');
 
         $select = 'year';
         $order = 'year ASC';
@@ -217,5 +218,21 @@ class Offersto extends MY_Controller {
                 exit;
             }
         }
+    }
+
+    public function draw_complete()
+    {
+        $this->config_model->set_config_db('year_' . $this->config_model->get_config_db('current_year') . '_complete', 'TRUE');
+        $this->session->set_flashdata('success', $this->lang->line('draw_complete_successful'));
+        redirect(site_url('admin/offersto'), 'location');
+        exit;
+    }
+
+    public function draw_incomplete()
+    {
+        $this->config_model->set_config_db('year_' . $this->config_model->get_config_db('current_year') . '_complete', 'FALSE');
+        $this->session->set_flashdata('success', $this->lang->line('draw_incomplete_successful'));
+        redirect(site_url('admin/offersto'), 'location');
+        exit;
     }
 }

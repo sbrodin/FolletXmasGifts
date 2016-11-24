@@ -7,4 +7,4 @@
     </div>
 <?php endif ?>
 
-<?= $this->lang->line('no_draw_yet') ?>
+<div class="m-b-1"><?= $info ?></div>

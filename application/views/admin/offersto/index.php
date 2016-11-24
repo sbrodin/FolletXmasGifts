@@ -21,6 +21,12 @@
         </select>
     </form>
 
+    <?php if ($current_year_complete == FALSE || $current_year_complete === 'FALSE') : ?>
+        <a class="btn btn-sm btn-outline-primary m-b-1" href="<?= site_url('admin/offersto/draw_complete/' . $current_year) ?>"><?= sprintf($this->lang->line('draw_complete'), $current_year) ?></a>
+    <?php else : ?>
+        <a class="btn btn-sm btn-outline-primary m-b-1" href="<?= site_url('admin/offersto/draw_incomplete/' . $current_year) ?>"><?= sprintf($this->lang->line('draw_incomplete'), $current_year) ?></a>
+    <?php endif ?>
+
     <table>
         <thead>
             <tr>
